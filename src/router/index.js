@@ -69,6 +69,17 @@ const routes = [
       requiresAuth: false
     }
   },
+  {
+    path: '/404',
+    component: () => import('@/components/404/NotFound.vue'),
+    name: 'not-found',
+    meta: {
+      showHeader: false,
+    }
+  },
+  { path: '*',
+    redirect: { name: 'not-found'}
+  },
 ]
 
 const router = new VueRouter({
