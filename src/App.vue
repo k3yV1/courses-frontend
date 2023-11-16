@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header v-if="showHeader" class="header relative md:py-6 bg-pink-400 md:p-0 p-4">
+      <Header class="md:block hidden" />
+      <MobileHeader class="md:hidden block" />
+    </header>
+    <div class="body">
+      <div class="container-fluid mx-auto">
+        <transition name="component-fade" mode="out-in">
+          <router-view />
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+<style lang="postcss">
+  #app {
+    @apply min-h-screen;
   }
-}
+</style>
+<script>
+import Header from "@/components/header/HeaderComponent.vue";
+import MobileHeader from "@/components/header/mobile/MobileHeaderComponent.vue";
+ export default {
+   components: {
+     MobileHeader,
+     Header
+   },
+
+   computed: {
+     showHeader() {
+       return this.$route.meta.showHeader !== false;
+     }
+   }
+ }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity 0.5s;
+}
+.component-fade-enter, .component-fade-leave-to {
+  opacity: 0;
 }
 </style>
