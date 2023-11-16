@@ -72,12 +72,12 @@ const routes = [
   {
     path: '/404',
     component: () => import('@/components/404/NotFound.vue'),
-    name: '404',
+    name: 'not-found',
     meta: {
       showHeader: false
     }
   },
-  { path: '*', redirect: '/404' },
+  { path: '*', redirect: { name: 'not-found'} },
 ]
 
 const router = new VueRouter({
